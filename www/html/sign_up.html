@@ -1,0 +1,52 @@
+<div data-role="page" id="sign_up">
+  <div data-role="header" data-position="fixed" data-tap-toggle="false">
+    <a href="sign_in.html" data-rel="back">登录</a>
+
+    <h1>注册</h1>
+  </div>
+  <div data-role="content">
+    <label for="name">用户名</label>
+    <input type="text" name="name" id="name"/>
+
+    <label for="name">邮箱</label>
+    <input type="text" name="email" id="email"/>
+
+    <label for="password">密码</label>
+    <input type="password" name="password" id="password"/>
+
+    <label for="password">密码确认</label>
+    <input type="password" name="password_confirmation" id="password_confirmation"/>
+
+    <input type="button" name="sign_up" id="sign_up_button" value="注册"/>
+
+    <div data-role="popup" id="sign_up_failure" class="ui-content" data-theme="e" data-overlay-theme="a">
+      <a href="#" data-rel="back" data-role="button"
+         data-theme="a" data-icon="delete"
+         data-iconpos="notext" class="ui-btn-right">关闭</a>
+      注册账号失败，请重试
+      <p id="sign_up_failure_message"></p>
+    </div>
+
+  </div>
+
+  <script type="text/javascript">
+    $('#sign_up_button').bind('click', function () {
+      var name = $('#name').val();
+      var email = $('#email').val();
+      var password = $('#password').val();
+      var password_confirmation = $('#password_confirmation').val();
+
+      var signUpSuccessful = function (data) {
+        localRepo.saveAuthToken(data);
+        router.goto('home.html');
+      };
+      var signUpFailed = function (data) {
+        console.log(data);
+        $('#sign_up_failure_message').html(data['responseText']);
+        $('#sign_up_failure').popup("open");
+      };
+      service.signUp(name, email, password, password_confirmation,
+          signUpSuccessful, signUpFailed);
+    });
+  </script>
+</div>

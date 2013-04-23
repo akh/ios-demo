@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="viewport"
+        content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1,
+                 width=device-width, height=device-height, target-densitydpi=device-dpi"/>
+
+  <script type="text/javascript" src="../js/jquery_mobile/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery_mobile/jquery.mobile.min.js"></script>
+  <script type="text/javascript" src="../js/jsrender/jsrender.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../css/jquery_mobile/jquery.mobile.min.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/index.css"/>
+  <title>火啦</title>
+</head>
+<body id="container">
+<script type="text/javascript" src="../cordova-2.5.0.js"></script>
+<script type="text/javascript" src="../js/index.js"></script>
+<script type="text/javascript" src="../js/router.js"></script>
+<script type="text/javascript" src="../js/local.repo.js"></script>
+<script type="text/javascript" src="../js/user.js"></script>
+<script type="text/javascript" src="../js/service.js"></script>
+
+<script type="text/javascript">
+  var task_1 = {
+    'id': 'task-0001',
+    'title': 'ST&SAT女鞋广告',
+    'description': '全智贤出演的ST&SAT女鞋广告',
+    'points': 10,
+    'video': {
+      'id': 'video-0001',
+      'url': '../video/st_sat_shoes_ad_1.mp4',
+      'poster': {
+        'url': '../video/st_sat_shoes_ad_1_poster.png'
+      }
+    }
+  };
+
+  var task_2 = {
+    'id': 'task-0002',
+    'title': 'ST&SAT女鞋广告',
+    'description': '全智贤出演的ST&SAT女鞋广告',
+    'points': 10,
+    'video': {
+      'id': 'video-0001',
+      'url': '../video/st_sat_shoes_ad_1.mp4',
+      'poster': {
+        'url': '../video/st_sat_shoes_ad_1_poster.png'
+      }
+    }
+  };
+
+  var tasks = [task_1, task_2];
+
+  var products = [];
+
+  products.push({
+    'title': '时尚甜美尖头绒面女鞋',
+    'image': "../img/shoes-1.jpg",
+    'description': '单鞋 欧美高跟鞋 OL鞋',
+    'id': 'shoes-1',
+    'count': '10',
+    'time_remaining': '3天10小时40分',
+    'price': '300',
+    'task': task_1
+  });
+
+  products.push({
+    'title': '百搭名媛尖头鞋细跟真皮',
+    'image': "../img/shoes-2.jpg",
+    'description': '韩国代购，打造“纤细之美”。',
+    'id': 'shoes-2',
+    'count': '15',
+    'time_remaining': '5天7小时35分',
+    'price': '400',
+    'task': task_2
+  });
+</script>
+
+<script id="task-detail-template" type="text/x-jsrender">
+  <div data-role="page" id="{{:task.id}}"
+       data-add-back-btn="true"
+       data-back-btn-text="返回">
+
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+      <h1>{{:task.title}}</h1>
+    </div>
+
+    <div data-role="content" id='task-content-{{:id}}'>
+      <video id="{{:task.video.id}}" controls width="290" height="218"
+             poster="../video/{{:task.video.poster.url}}" preload="auto">
+        <source type="video/mp4" src="../video/{{:task.video.url}}">
+      </video>
+
+      <div data-role="collapsible" data-theme="b"
+           data-content-theme="d"
+           data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+        <h4>参与互动，赢取{{:task.points}}个火宝！</h4>
+
+        <fieldset data-role="controlgroup">
+          <legend>1. 从广告中可以看出，ST&SAT是一个专注于什么的品牌？</legend>
+          <input type="radio" name="{{:task.id}}-q-1" id="{{:task.id}}-q-1-a-1" value="choice-1-q-1-a-1">
+          <label for="{{:task.id}}-q-1-a-1">精美女装</label>
+          <input type="radio" name="{{:task.id}}-q-1" id="{{:task.id}}-q-1-a-2" value="choice-2-q-1-a-2">
+          <label for="{{:task.id}}-q-1-a-2">精美女鞋</label>
+          <input type="radio" name="{{:task.id}}-q-1" id="{{:task.id}}-q-1-a-3" value="choice-3-q-1-a-3">
+          <label for="{{:task.id}}-q-1-a-3">化妆品</label>
+          <input type="radio" name="{{:task.id}}-q-1" id="{{:task.id}}-q-1-a-4" value="choice-3-q-1-a-4">
+          <label for="{{:task.id}}-q-1-a-4">首饰</label>
+        </fieldset>
+
+        <fieldset data-role="controlgroup">     
+          <legend>2. 请问广告中所表达的ST&SAT的理念是？
+            <a href="#tip-q-2" data-rel="popup"
+               class="ui-icon-alt" data-inline="true"
+               data-transition="pop" data-icon="info"
+               data-theme="e" data-iconpos="notext">小提示</a>
+
+            <div data-role="popup" id="tip-q-2" class="ui-content" data-theme="e" style="max-width:350px;">
+                  <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext"
+                     class="ui-btn-right">Close</a>
+
+              <p>可以参考广告结尾处的广告词哦！</p>
+            </div>
+
+          </legend>
+          <input type="radio" name="{{:task.id}}-q-2" id="{{:task.id}}-q-2-a-1" value="choice-1-q-2-a-1">
+          <label for="{{:task.id}}-q-2-a-1">激发内心潜力</label>
+          <input type="radio" name="{{:task.id}}-q-2" id="{{:task.id}}-q-2-a-2" value="choice-2-q-2-a-1">
+          <label for="{{:task.id}}-q-2-a-2">引领年轻时尚</label>
+          <input type="radio" name="{{:task.id}}-q-2" id="{{:task.id}}-q-2-a-3" value="choice-3-q-2-a-1">
+          <label for="{{:task.id}}-q-2-a-3">唤醒独特魅力</label>
+          <input type="radio" name="{{:task.id}}-q-2" id="{{:task.id}}-q-2-a-4" value="choice-4-q-2-a-1">
+          <label for="{{:task.id}}-q-2-a-4">展现女性活力</label>
+        </fieldset>
+
+        <a href="#" data-theme="b" data-role="button" id="submit-{{:task.id}}">提交答案</a>
+
+        <div data-role="popup" id="{{:task.id}}-popup"
+             class="ui-content" data-theme="e" data-overlay-theme="a">
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script id="product-detail-template" type="text/x-jsrender">
+  <div data-role="page" id="{{:id}}"
+       data-add-back-btn="true"
+       data-back-btn-text="返回">
+    <div data-role="header" data-position="fixed" data-tap-toggle="false">
+      <h1>{{:title}}</h1>
+    </div>
+
+    <div data-role="content" id='product-content-{{:id}}'>
+      <img src="{{:image}}">
+      <table data-role="table" id="table-column-toggle" class="ui-responsive table-stroke">
+             
+        <thead>
+               
+        <tr>
+                   
+          <th>产品名称</th>
+                   
+          <th>产品描述</th>
+                   
+          <th>剩余数量</th>
+                   
+          <th>剩余时间</th>
+                   
+          <th>兑换条件</th>
+                 
+        </tr>
+             
+        </thead>
+             
+        <tbody>
+               
+        <tr>
+                   
+          <td>{{:title}}</td>
+                   
+          <td>{{:description}}</td>
+                   
+          <td>{{:count}}</td>
+                   
+          <td>{{:time_remaining}}</td>
+                   
+          <td>{{:price}}火宝</td>
+                 
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div data-role="footer" data-id="footer" data-position="fixed" data-tap-toggle="false">
+      <div data-role="navbar">
+        <ul>
+          <li><a href="#exchange" data-transition="slideup" data-icon="home">直接兑换</a></li>
+          <li><a href="#{{:task.id}}" data-transition="slideup" data-icon="info">查询相关任务</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</script>
+
+<script id="product-overview-template" type="text/x-jsrender">
+  <li>
+    <a href="#{{:id}}">
+      <img src="{{:image}}" width="200px" height="270px">
+      <h2>{{:title}}</h2>
+      <p>{{:description}}</p>
+      <span class="ui-li-count">{{:count}}</span>
+    </a>
+  </li>
+</script>
+
+<div data-role="page" id="home">
+
+  <div data-role="panel" id="product-categories">
+     <p>这里将显示产品分类</p>
+  </div>
+
+  <div data-role="header" data-position="fixed" data-tap-toggle="false">
+    <h1>靓品</h1>
+    <a href="#product-categories" data-icon="bars" class="ui-btn-right">分类</a>
+  </div>
+
+  <div data-role="content" id='content'>
+    <div>
+      <ul data-role="listview" id='product-list'>
+      </ul>
+    </div>
+
+    <script type="text/javascript">
+      $("#product-list").html($("#product-overview-template").render(products));
+      var pageContainer = $("#container");
+      pageContainer.append($("#product-detail-template").render(products));
+      pageContainer.append($("#task-detail-template").render(products));
+
+      var getPopupContent = function (raw) {
+        return '<p>' + raw + '</p>';
+      };
+
+      var check_answers = function (task) {
+        answer_1_checked = $("#" + task.id + "-q-1-a-2").is(':checked');
+        answer_2_checked = $("#" + task.id + "-q-2-a-3").is(':checked');
+        if (answer_1_checked && answer_2_checked) {
+          $.mobile.navigate('#share');
+        } else {
+          var error_message;
+          if (!answer_1_checked && !answer_2_checked) {
+            error_message = getPopupContent("问题1和问题2回答有误，请重试！");
+          } else if (!answer_1_checked) {
+            error_message = getPopupContent("问题1回答有误，请重试！");
+          } else {
+            error_message = getPopupContent("问题2回答有误，请重试！")
+          }
+          var error_popup = $("#" + task.id + "-popup");
+          error_popup.html(error_message);
+          error_popup.popup("open");
+        }
+      };
+
+      $("#submit-" + task_1.id).click(function () {
+        check_answers(task_1);
+      });
+      $("#submit-" + task_2.id).click(function () {
+        check_answers(task_2);
+      });
+      //      alert($("#submit-" + task_1.id).html());
+    </script>
+  </div>
+
+  <div data-role="footer" data-id="footer" data-position="fixed" data-tap-toggle="false">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="slideup" data-icon="home" class="ui-btn-active ui-state-persist">靓品</a>
+        </li>
+        <li><a href="#task" data-transition="slideup" data-icon="info">任务</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div data-role="page" id="task">
+  <div data-role="header" data-position="fixed" data-tap-toggle="false">
+    <h1>任务</h1>
+  </div>
+
+  <div data-role="content" id='market-content'>
+    <div>
+      <ul data-role="listview" id='task-list'>
+      </ul>
+    </div>
+
+    <script id="task-overview-template" type="text/x-jsrender">
+      <li>
+        <a href="#{{:id}}">
+          <img src="{{:video.poster.url}}" width="200px" height="270px">
+
+          <h2>{{:title}}</h2>
+
+          <p>{{:description}}</p>
+          <span class="ui-li-count">{{:points}}</span>
+        </a>
+      </li>
+    </script>
+
+    <script type="text/javascript">
+      $("#task-list").html($("#task-overview-template").render(tasks));
+    </script>
+  </div>
+
+  <div data-role="footer" data-id="footer" data-position="fixed" data-tap-toggle="false">
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="slideup" data-icon="home">靓品</a></li>
+        <li><a href="#task" data-transition="slideup" data-icon="info" class="ui-btn-active ui-state-persist">任务</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div data-role="page" id="share">
+  <div data-role="header" data-position="fixed" data-tap-toggle="false">
+    <h1>分享</h1>
+  </div>
+
+  <div data-role="content" id='share-content'>
+    <h2>恭喜您获得10个火宝作为奖励！</h2>
+
+    <h2>参与下面的分享，您将获赠更多火宝</h2>
+
+
+    <div data-role="collapsible" data-theme="c" data-content-theme="d">
+      <h4>新浪微博</h4>
+
+      <fieldset data-role="controlgroup">
+        <label for="sina-weibo-id">账号:</label>
+        <input type="text" name="text-basic" id="sina-weibo-id" value="">
+        <label for="sina-weibo-password">密码:</label>
+        <input type="password" name="text-basic" id="sina-weibo-password" value="" autocomplete="off">
+      </fieldset>
+    </div>
+
+    <div data-role="collapsible" data-theme="c" data-content-theme="d">
+      <h4>开心网</h4>
+
+      <fieldset data-role="controlgroup">
+        <label for="sina-weibo-id">账号:</label>
+        <input type="text" name="text-basic" id="kaixin-id" value="">
+        <label for="sina-weibo-password">密码:</label>
+        <input type="password" name="text-basic" id="kaixin-password" value="" autocomplete="off">
+      </fieldset>
+    </div>
+
+    <br/>
+    <br/>
+    <a href="#" data-theme="b" data-role="button" id="share-confirm">立刻分享</a>
+    <a href="#home" data-theme="c" data-role="button" id="share-cancel">下次再说</a>
+  </div>
+
+  <div data-role="popup" id="share_non_empty" class="ui-content" data-theme="e" data-overlay-theme="a">
+    请至少提供一种分享方式的信息
+  </div>
+
+  <div data-role="popup" id="share_ok" class="ui-content" data-theme="e" data-overlay-theme="a">
+    <p>感谢分享，您将获得10个火宝作为奖励！</p>
+
+    <p>即将自动返回，请耐心等待...</p>
+  </div>
+
+  <script type="text/javascript">
+    $("#share-confirm").bind('click', function () {
+      var sinaWeiboId = $("#sina-weibo-id").val();
+      var sinaWeiboPassword = $("#sina-weibo-password").val();
+      var kaixinId = $("#kaixin-id").val();
+      var kaixinPassword = $("#kaixin-password").val();
+      var hasSinaWeiboInfo = sinaWeiboId.length != 0 && sinaWeiboPassword.length != 0;
+      var hasKaixinInfo = kaixinId.length != 0 && kaixinPassword.length != 0;
+      if (hasSinaWeiboInfo || hasKaixinInfo) {
+        $("#share_ok").popup("open");
+        setTimeout(function () {
+          $.mobile.navigate('#home');
+        }, 2000)
+      } else {
+        $("#share_non_empty").popup("open");
+      }
+    });
+  </script>
+</div>
+
+
+</body>
+</html>
